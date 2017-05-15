@@ -12,21 +12,17 @@ export const request = (method, url, body, queryParameters, form, config)=>{
   method = method.toLowerCase()
   config = config || {};
   return axios(Object.assign({}, {
-    // `url` is the server URL that will be used for the request
-    url,
-
-    // `method` is the request method to be used when making the request
-    method, // default
-
-    // `headers` are custom headers to be sent
-    headers: config.headers,
-
-    // `params` are the URL parameters to be sent with the request
-    // Must be a plain object or a URLSearchParams object
-    params: queryParameters,
-
-    data: body
-  }, config}));
+      // `url` is the server URL that will be used for the request
+      url,
+      // `method` is the request method to be used when making the request
+      method, // default
+      // `headers` are custom headers to be sent
+      headers: config.headers,
+      // `params` are the URL parameters to be sent with the request
+      // Must be a plain object or a URLSearchParams object
+      params: queryParameters,
+      data: body
+    }, config));
 }
 
 {{> methods }}
