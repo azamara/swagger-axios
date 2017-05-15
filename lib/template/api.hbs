@@ -10,19 +10,25 @@ export const setDomain = ($domain) => {
 }
 export const request = (method, url, body, queryParameters, form, config)=>{
   method = method.toLowerCase()
-  let keys = Object.keys(queryParameters)
-  let queryUrl = url
-  if ( keys.length > 0 ) {
-      queryUrl = url + '?' + qs.stringify(queryParameters)
-  }
-  // let queryUrl = url+(keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '')
-  if(body){
-      return axios[method](queryUrl,body,config)
-  } else if (method === 'get') {
-      return axios[method](queryUrl,{params: form},config)
-  } else {
-      return axios[method](queryUrl,qs.stringify(form),config)
-  }
+  config = config || {};
+  return axios(Object.assign({}, {
+    // `url` is the server URL that will be used for the request
+    url,
+
+    // `method` is the request method to be used when making the request
+    method, // default
+
+    url,
+
+    // `headers` are custom headers to be sent
+    headers: config.headers,
+
+    // `params` are the URL parameters to be sent with the request
+    // Must be a plain object or a URLSearchParams object
+    params: queryParameters,
+
+    data: body
+  }, config})
 }
 
 {{> methods }}
